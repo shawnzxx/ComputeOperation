@@ -34,11 +34,6 @@ namespace Compute.Infrastructure.Repositories
 
         public Operation CreateOp(Operation operation)
         {
-            if (operation == null)
-            {
-                throw new ArgumentNullException(nameof(operation));
-            }
-
             return _dbContext.Operations.Add(operation).Entity;
         }
     }

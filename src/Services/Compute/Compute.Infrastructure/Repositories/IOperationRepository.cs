@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Compute.Domain.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Compute.Domain.Models
+namespace Compute.Infrastructure.Repositories
 {
     public interface IOperationRepository
     {

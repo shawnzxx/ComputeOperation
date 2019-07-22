@@ -20,7 +20,7 @@
     "Compute.Application": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/v1/compute/add/2/3",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

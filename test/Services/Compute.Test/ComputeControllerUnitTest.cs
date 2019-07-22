@@ -16,9 +16,9 @@ namespace Compute.Test
             var computeController = A.Fake<ComputeController>();
 
             // Act
-            var result = computeController.Add(x, y);
+            var result = computeController.Cal(x, y, 1);
             // Assert
-            Assert.True(result.Value.Equals(13));
+            Assert.True(result.Result.Equals(13));
         }
 
         [Fact]
@@ -30,9 +30,9 @@ namespace Compute.Test
 
             var computeController = A.Fake<ComputeController>();
 
-            var result = computeController.Sub(x, y);
+            var result = computeController.Cal(x, y, 2);
 
-            Assert.True(result.Value.Equals(7));
+            Assert.True(result.Result.Equals(7));
         }
 
         [Fact]
@@ -44,9 +44,9 @@ namespace Compute.Test
 
             var computeController = A.Fake<ComputeController>();
 
-            var result = computeController.Mul(x, y);
+            var result = computeController.Cal(x, y, 3);
 
-            Assert.True(result.Value.Equals(2));
+            Assert.True(result.Result.Equals(2));
         }
 
         [Fact]
@@ -58,9 +58,9 @@ namespace Compute.Test
 
             var computeController = A.Fake<ComputeController>();
 
-            var result = computeController.Div(x, y);
+            var result = computeController.Cal(x, y, 4);
 
-            Assert.True(result.Value.Equals(25));
+            Assert.True(result.Result.Equals(25));
         }
 
 

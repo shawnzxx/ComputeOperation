@@ -19,34 +19,29 @@ namespace Compute.Application.Controllers
             _operationRepository = operationRepository;
         }
         // GET api/v1/compute/add/7/8
-        [HttpGet("add/{x}/{y}")]
-        public ActionResult<double> Add(double x, double y)
+        [HttpPost("add/{x}/{y}/{typeNum}")]
+        public async Task<ActionResult<double>> Cal(double x, double y, int typeNum)
         {
-            return Ok();
+            var operation = new Operation(x, y, typeNum);
+            var storedOperation =  _operationRepository.CreateOp(operation);
+            await _operationRepository.SaveChangesAsync();
+            return Ok(storedOperation.Result);
         }
 
-        // GET api/v1/compute/sub/7/8
-        [HttpGet("sub/{x}/{y}")]
-        public ActionResult<double> Sub(double x, double y)
+        // GET api/v1/ops
+        [HttpGet("ops")]
+        public async Task<ActionResult<IEnumerable<Operation>>> GetAllOps()
         {
-            var result = x - y;
-            return result;
+            var ops = await _operationRepository.GetAllOpsAsync();
+            return Ok(ops);
         }
 
-        // GET api/v1/compute/mul/2/5
-        [HttpGet("mul/{x}/{y}")]
-        public ActionResult<double> Mul(double x, double y)
+        // GET api/v1/ops/5
+        [HttpGet("ops/{id}")]
+        public async Task<ActionResult<Operation>> GetOpsById(int id)
         {
-            var result = x * y;
-            return result;
-        }
-
-        // GET api/v1/compute/div/10/5
-        [HttpGet("div/{x}/{y}")]
-        public ActionResult<double> Div(double x, double y)
-        {
-            var result = x / y;
-            return result;
+            var op = await _operationRepository.GetOpAsync(id);
+            return Ok(op);
         }
     }
 }
