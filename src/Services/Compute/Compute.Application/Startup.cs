@@ -76,9 +76,13 @@ namespace Compute.Application
             //register different httpClient
             services.AddHttpClient("RazerIdClient", client =>
             {
+                //control HttpClient lifetimes
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
 
+            //https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests
+            //Registering the client services as shown in the previous code, makes the DefaultClientFactory create an HttpClient configured specifically for each service
+            //Just by registering your client service class with AddHttpClient(), the HttpClient object that will be injected into your class will use the configuration and policies provided upon registration. 
             services.AddHttpClient<IAuditService, AuditService>();
         }
 
