@@ -76,6 +76,7 @@ namespace Audit.Application
             #region Database repository
             services.AddScoped<IRunningTotalRepository, RunningTotalRepository>();
             #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Compute.Application.Services;
 using Compute.Domain.Models;
 using Compute.Infrastructure;
 using Compute.Infrastructure.Repositories;
@@ -71,6 +72,14 @@ namespace Compute.Application
             #region Database repository
             services.AddScoped<IOperationRepository, OperationRepository>();
             #endregion
+
+            //register different httpClient
+            services.AddHttpClient("RazerIdClient", client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+
+            services.AddHttpClient<IAuditService, AuditService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
