@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using Compute.Domain.Models;
-using Compute.Infrastructure;
-using Compute.Infrastructure.Repositories;
+using System.Threading.Tasks;
+using Audit.Infrastructure;
+using Audit.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Compute.Application
+namespace Audit.Application
 {
     public class Startup
     {
@@ -32,9 +37,9 @@ namespace Compute.Application
                 setupAction.SwaggerDoc("v1",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "Compute API",
+                        Title = "Audit API",
                         Version = "v1",
-                        Description = "Through this API you can access compute functions",
+                        Description = "Through this API you can access audit functions",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
                             Email = "shawn.zhang@avanade.com",
@@ -55,8 +60,8 @@ namespace Compute.Application
             });
 
             #region EntityFramework Core
-            var connection = Configuration.GetConnectionString("OperationDBConnection");
-            services.AddDbContext<OperationDbContext>(optionsBuilder =>
+            var connection = Configuration.GetConnectionString("AuditDBConnection");
+            services.AddDbContext<RunningTotalContext>(optionsBuilder =>
             {
                 optionsBuilder
                 .UseSqlServer(connection, sqlServerOptionsAction: sqlOptions => {
@@ -69,7 +74,7 @@ namespace Compute.Application
             #endregion
 
             #region Database repository
-            services.AddScoped<IOperationRepository, OperationRepository>();
+            services.AddScoped<IRunningTotalRepository, RunningTotalRepository>();
             #endregion
         }
 

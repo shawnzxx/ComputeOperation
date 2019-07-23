@@ -9,7 +9,7 @@ namespace Compute.Infrastructure
 {
     public class OperationDbContext : DbContext
     {
-        //we add SamuraiContext to the ASP.net Core IoC container with options, so that we can use it in Startup.cs
+        //we add OperationDbContext to the ASP.net Core IoC container with options, so that we can use it in Startup.cs
         public OperationDbContext(DbContextOptions<OperationDbContext> options) : base(options)
         {
 
