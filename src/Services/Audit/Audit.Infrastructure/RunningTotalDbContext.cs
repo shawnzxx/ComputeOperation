@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Audit.Infrastructure
 {
-    public class RunningTotalContext : DbContext
+    public class RunningTotalDbContext : DbContext
     {
         public  DbSet<RunningTotal> RunningTotal { get; set; }
 
         //we add RunningTotalContext to the ASP.net Core IoC container with options, so that we can use it in Startup.cs
-        public RunningTotalContext(DbContextOptions<RunningTotalContext> options) : base(options)
+        public RunningTotalDbContext(DbContextOptions<RunningTotalDbContext> options) : base(options)
         {
         }
 

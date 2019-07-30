@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Audit.Application.Migrations
 {
-    [DbContext(typeof(RunningTotalContext))]
+    [DbContext(typeof(RunningTotalDbContext))]
     partial class RunningTotalContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Audit.Application.Migrations
 {
-    [DbContext(typeof(RunningTotalContext))]
+    [DbContext(typeof(RunningTotalDbContext))]
     [Migration("20190723063714_InitialDB")]
     partial class InitialDB
     {

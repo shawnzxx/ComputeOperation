@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Audit.Infrastructure.Repositories
+namespace Audit.Domain.Models
 {
     public interface IRunningTotalRepository
     {

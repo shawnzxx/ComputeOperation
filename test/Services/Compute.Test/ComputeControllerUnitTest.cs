@@ -1,4 +1,5 @@
 using Compute.Application.Controllers;
+using Compute.Domain.Models;
 using FakeItEasy;
 using System;
 using Xunit;
@@ -13,54 +14,54 @@ namespace Compute.Test
             // Arange
             double x = 5;
             double y = 8;
-            var computeController = A.Fake<ComputeController>();
+            var operation = new Operation(x, y, 1);
 
             // Act
-            var result = computeController.Cal(x, y, 1);
+            var result = operation.Result;
             // Assert
-            Assert.True(result.Result.Equals(13));
+            Assert.True(result.Equals(13));
         }
 
         [Fact]
         public void Sub_ValidValue_ReturnsCorrectResult()
         {
-            // CHALLENGE - Complete this test method
-            double x = 10;
-            double y = 3;
+            // Arange
+            double x = 8;
+            double y = 2;
+            var operation = new Operation(x, y, 2);
 
-            var computeController = A.Fake<ComputeController>();
-
-            var result = computeController.Cal(x, y, 2);
-
-            Assert.True(result.Result.Equals(7));
+            // Act
+            var result = operation.Result;
+            // Assert
+            Assert.True(result.Equals(6));
         }
 
         [Fact]
         public void Mul_ValidValue_ReturnsCorrectResult()
         {
-            // CHALLENGE - Complete this test method
-            double x = 2;
-            double y = 1;
+            // Arange
+            double x = 8;
+            double y = 2;
+            var operation = new Operation(x, y, 3);
 
-            var computeController = A.Fake<ComputeController>();
-
-            var result = computeController.Cal(x, y, 3);
-
-            Assert.True(result.Result.Equals(2));
+            // Act
+            var result = operation.Result;
+            // Assert
+            Assert.True(result.Equals(16));
         }
 
         [Fact]
         public void Div_ValidValue_ReturnsCorrectResult()
         {
-            // CHALLENGE - Complete this test method
-            double x = 100;
+            // Arange
+            double x = 16;
             double y = 4;
+            var operation = new Operation(x, y, 4);
 
-            var computeController = A.Fake<ComputeController>();
-
-            var result = computeController.Cal(x, y, 4);
-
-            Assert.True(result.Result.Equals(25));
+            // Act
+            var result = operation.Result;
+            // Assert
+            Assert.True(result.Equals(4));
         }
 
 

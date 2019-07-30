@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Audit.Domain.Models;
 using Audit.Infrastructure;
 using Audit.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -61,7 +62,7 @@ namespace Audit.Application
 
             #region EntityFramework Core
             var connection = Configuration.GetConnectionString("AuditDBConnection");
-            services.AddDbContext<RunningTotalContext>(optionsBuilder =>
+            services.AddDbContext<RunningTotalDbContext>(optionsBuilder =>
             {
                 optionsBuilder
                 .UseSqlServer(connection, sqlServerOptionsAction: sqlOptions => {

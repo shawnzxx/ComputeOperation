@@ -9,9 +9,9 @@ namespace Audit.Infrastructure.Repositories
 {
     public class RunningTotalRepository : IRunningTotalRepository
     {
-        private readonly RunningTotalContext _dbContext;
+        private readonly RunningTotalDbContext _dbContext;
 
-        public RunningTotalRepository(RunningTotalContext dbContext)
+        public RunningTotalRepository(RunningTotalDbContext dbContext)
         {
             _dbContext = dbContext;
         }

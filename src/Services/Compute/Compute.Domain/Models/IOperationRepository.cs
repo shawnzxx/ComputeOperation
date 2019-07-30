@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Compute.Infrastructure.Repositories
+namespace Compute.Domain.Models
 {
     public interface IOperationRepository
     {
