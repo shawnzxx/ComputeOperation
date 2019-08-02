@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Compute.Test
 {
-    public class ComputeControllerUnitTest
+    public class ComputeDomainUnitTest
     {
         [Fact]
         public void Add_ValidValue_ReturnsCorrectResult()
