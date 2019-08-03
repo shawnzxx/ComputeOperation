@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Audit.Application.EventHandlers;
 using Audit.Domain.Models;
 using Audit.Infrastructure;
 using Audit.Infrastructure.Repositories;
+using Merlion.Core.DistributedTracing;
+using Merlion.Core.Microservices.EventBus;
+using Merlion.Core.Microservices.EventBus.Kafka;
+using Merlion.Core.Microservices.EventBus.Kafka.AppSettings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -77,6 +82,13 @@ namespace Audit.Application
             #region Database repository
             services.AddScoped<IRunningTotalRepository, RunningTotalRepository>();
             #endregion
+
+            services.Configure<DistributedTracingOption>(Configuration.GetSection(nameof(DistributedTracingOption)));
+            services.Configure<KafkaConfiguration>(Configuration.GetSection(nameof(KafkaConfiguration)));
+            services.AddTransient<ISubscriber, KafkaConsumer>();
+            services.AddHostedService<AuditEventHandler>();
+            services.AddJaegerTracing();
+
 
         }
 

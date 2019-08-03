@@ -4,6 +4,11 @@ using Compute.Application.Services;
 using Compute.Domain.Models;
 using Compute.Infrastructure;
 using Compute.Infrastructure.Repositories;
+using Merlion.Core.DistributedTracing;
+using Merlion.Core.HttpConnectionInfo;
+using Merlion.Core.Microservices.EventBus;
+using Merlion.Core.Microservices.EventBus.Kafka;
+using Merlion.Core.Microservices.EventBus.Kafka.AppSettings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -83,7 +88,14 @@ namespace Compute.Application
             //https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests
             //Registering the client services as shown in the previous code, makes the DefaultClientFactory create an HttpClient configured specifically for each service
             //Just by registering your client service class with AddHttpClient(), the HttpClient object that will be injected into your class will use the configuration and policies provided upon registration. 
-            services.AddHttpClient<IAuditService, AuditService>();
+            //services.AddHttpClient<IAuditService, AuditService>();
+
+            services.AddTransient<IAuditService, AuditService>();
+            services.AddTransient<IPublisher, KafkaProducer>();
+            services.Configure<KafkaConfiguration>(Configuration.GetSection(nameof(KafkaConfiguration))); services.Configure<DistributedTracingOption>(Configuration.GetSection(nameof(DistributedTracingOption)));
+            services.AddJaegerTracing();
+            services.AddConnectionInfo();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +124,9 @@ namespace Compute.Application
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseDistributedTracing();
+            app.UseConnectionInfo();
 
             app.UseHttpsRedirection();
             app.UseMvc();
