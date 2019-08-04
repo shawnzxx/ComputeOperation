@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  audit.application:
+    image: ${DOCKER_REGISTRY-}auditapplication
+    build:
+      context: .
+      dockerfile: src/Services/Audit/Audit.Application/Dockerfile
+
+  compute.application:
+    image: ${DOCKER_REGISTRY-}computeapplication
+    build:
+      context: .
+      dockerfile: src/Services/Compute/Compute.Application/Dockerfile
+

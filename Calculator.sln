@@ -27,11 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compute.Infrastructure", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Audit", "Audit", "{21DCADB6-6286-40A0-96E6-FDA78481D7DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Application", "src\Services\Audit\Audit.Application\Audit.Application.csproj", "{58B899A5-003F-4D99-BFEC-B68A7CE5353A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audit.Application", "src\Services\Audit\Audit.Application\Audit.Application.csproj", "{58B899A5-003F-4D99-BFEC-B68A7CE5353A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Domain", "src\Services\Audit\Audit.Domain\Audit.Domain.csproj", "{E568A08C-B7C4-4276-AFF9-6D731B6692EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audit.Domain", "src\Services\Audit\Audit.Domain\Audit.Domain.csproj", "{E568A08C-B7C4-4276-AFF9-6D731B6692EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.Infrastructure", "src\Services\Audit\Audit.Infrastructure\Audit.Infrastructure.csproj", "{D52B8EAF-04EE-4622-893A-5614A0458B00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audit.Infrastructure", "src\Services\Audit\Audit.Infrastructure\Audit.Infrastructure.csproj", "{D52B8EAF-04EE-4622-893A-5614A0458B00}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38449E38-025D-407D-A929-AEBBD84D8A33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{D52B8EAF-04EE-4622-893A-5614A0458B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D52B8EAF-04EE-4622-893A-5614A0458B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D52B8EAF-04EE-4622-893A-5614A0458B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38449E38-025D-407D-A929-AEBBD84D8A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38449E38-025D-407D-A929-AEBBD84D8A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38449E38-025D-407D-A929-AEBBD84D8A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38449E38-025D-407D-A929-AEBBD84D8A33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

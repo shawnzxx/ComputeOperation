@@ -1,0 +1,69 @@
+version: '3.4'
+
+services:
+  audit.application:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44304
+    ports:
+      - "17366:80"
+      - "44304:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  compute.application:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44331
+    ports:
+      - "59473:80"
+      - "44331:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      
+  portal.web:
+    image: lilansam/ms-training-web:v1
+    environment:
+      - AppConfig:BaseAddress=http://compute.applications/api/v1/
+    ports:
+      - '8873:80'
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    restart: on-failure
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+    volumes:
+      - C:\kafka\zk_data:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  broker-1:
+    image: confluentinc/cp-kafka:latest
+    restart: on-failure
+    container_name: broker-1
+    hostname: broker-1
+    depends_on:
+      - zookeeper
+    extra_hosts:
+      - 'moby:127.0.0.1'
+      - 'localhost: 127.0.0.1'  
+    ports:
+      - 9091:9091
+      - 9092:9092
+    volumes:
+      - C:\kafka\kf_data:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'INTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092,INTERNAL://broker-1:9091'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_NUM_PARTITIONS: 2
+
